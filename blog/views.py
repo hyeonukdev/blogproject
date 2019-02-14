@@ -46,5 +46,5 @@ def blogpost(request):
         #2.빈 페이지를 띄워주는 기능 -> GET        
     else:
         form = BlogPost()
-        return render(request, 'new.html', {'form':form})
+        return render(request, 'blog/new.html', {'form':form})
         
