@@ -9,7 +9,7 @@ from .form import BlogPost
 def home(request):
     blogs = Blog.objects
     #블로그 모든 글들을 대상으로
-    blog_list = Blog.objects.all()
+    blog_list = Blog.objects.all().order_by('-id')
     #블로그 객체 세 개를 한 페이지로 자르기
     paginator = Paginator(blog_list, 3)
     #request된 페이지가 뭔지 알아내고
