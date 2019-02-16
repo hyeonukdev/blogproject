@@ -8,8 +8,7 @@ class BlogPost(forms.ModelForm):
         fields = ['title', 'body']
 
 # class BlogPost(forms.Form):
-#     email = forms.EmailField()
+#     title = forms.CharField(max_length=30)
+#     body = forms.CharField()  
+#     age = forms.IntegerField()
 #     files = forms.FileField()
-#     url = forms.URLField()
-#     words = forms.CharField(max_length=200)
-#     max_number = forms.ChoiceField(choices=[('1','one'),('2','two'),('3','three'),('4','four')])
