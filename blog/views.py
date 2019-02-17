@@ -1,10 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.core.paginator import Paginator
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 from .models import Blog
 from .form import BlogPost
+from .form import PicPost
+from .form import UploadFileForm
 
 def home(request):
     blogs = Blog.objects
@@ -47,4 +50,27 @@ def blogpost(request):
     else:
         form = BlogPost()
         return render(request, 'blog/new.html', {'form':form})
+
+def picpost(request):
+    #1.입력된 내용 처리 -> POST
+    if request.method =='POST':
+        form = PicPost(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('home')
+
+        #2.빈 페이지를 띄워주는 기능 -> GET        
+    else:
+        form = PicPost()
+        return render(request, 'blog/new.html', {'form':form})        
         
+def uploadfileform(request):
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            return HttpResponseRedirect('/')
+    else:
+        form = UploadFileForm()
+    return render(request, 'blog/upload.html', {'form': form})   

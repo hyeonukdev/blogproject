@@ -11,3 +11,7 @@ class Blog(models.Model):
 
     def summary(self):
         return self.body[:100]        
+
+class UploadFileModel(models.Model):
+    title = models.CharField(max_length=200)
+    file = models.FileField(null=True)
